@@ -43,6 +43,12 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
 		<!-- JPA,ORM,DATA -->
 		<dependency>
 			<groupId>javax.persistence</groupId>
@@ -105,11 +111,17 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+		</dependency>
+
 		<!-- Logging -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.slf4j</groupId> -->
-<!-- 			<artifactId>log4j-over-slf4j</artifactId> -->
-<!-- 			<version>1.7.13</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.slf4j</groupId> -->
+		<!-- <artifactId>log4j-over-slf4j</artifactId> -->
+		<!-- <version>1.7.13</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 </project>

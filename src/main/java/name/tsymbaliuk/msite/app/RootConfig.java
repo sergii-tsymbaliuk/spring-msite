@@ -1,38 +1,41 @@
 package name.tsymbaliuk.msite.app;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 //import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan("name.tsymbaliuk.msite.app")
-@EnableJpaRepositories("name.tsymbaliuk.msite.data")
-//@EnableTransactionManagement
-//@PropertySource("classpath:application.properties")
+@EnableJpaRepositories("name.tsymbaliuk.msite.app.data")
+@EnableTransactionManagement
 public class RootConfig {
+	static String jpa_unit_name="msite_unit";
 
-	@Value("name.tsymbaliuk.jpa.unit_name")
-	String jpa_unit_name;
-	
 	@Bean
 	public EntityManagerFactory entityManagerFactory() {
-		System.out.format("Unit: %s\n",jpa_unit_name);
-		return Persistence.createEntityManagerFactory("persistenseUnit_Derby");
+		return Persistence.createEntityManagerFactory(jpa_unit_name);
 	}	
 
 	@Bean
-	public PlatformTransactionManager transactionManager() {
-	
+	@Inject
+	public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 		JpaTransactionManager txManager = new JpaTransactionManager();
-		txManager.setEntityManagerFactory(entityManagerFactory());
+		txManager.setEntityManagerFactory(entityManagerFactory);
 	    return txManager;
-	}	
+	}
+	
+    @Bean 
+    public HibernateExceptionTranslator hibernateExceptionTranslator(){ 
+      return new HibernateExceptionTranslator(); 
+    }
 }
