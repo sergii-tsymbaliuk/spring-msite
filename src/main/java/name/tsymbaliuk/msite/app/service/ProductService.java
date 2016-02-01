@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -16,7 +15,7 @@ import name.tsymbaliuk.msite.app.entity.Product;
 
 @Service
 public class ProductService {
-	@Autowired
+	@Inject
 	ProductRepository prodRepo;
 	
 	Product findOneById(Long id){
@@ -31,23 +30,28 @@ public class ProductService {
 	public void delete(Iterable<? extends Product> arg0) {
 		prodRepo.delete(arg0);
 	}
-
+	
+	@Transactional
 	public void delete(Long arg0) {
 		prodRepo.delete(arg0);
 	}
 
+	@Transactional
 	public void delete(Product arg0) {
 		prodRepo.delete(arg0);
 	}
 
+	@Transactional
 	public void deleteAll() {
 		prodRepo.deleteAll();
 	}
 
+	@Transactional
 	public void deleteAllInBatch() {
 		prodRepo.deleteAllInBatch();
 	}
 
+	@Transactional
 	public void deleteInBatch(Iterable<Product> arg0) {
 		prodRepo.deleteInBatch(arg0);
 	}
@@ -68,10 +72,12 @@ public class ProductService {
 		return prodRepo.findAll(arg0);
 	}
 
+	@Transactional
 	public <S extends Product> S save(S entity) {
 		return prodRepo.save(entity);
 	}
 
+	@Transactional
 	public <S extends Product> List<S> save(Iterable<S> entities) {
 		return prodRepo.save(entities);
 	}
@@ -86,6 +92,10 @@ public class ProductService {
 
 	public Product getOne(Long arg0) {
 		return prodRepo.getOne(arg0);
+	}
+
+	public List<Product> findByCategoryId(Long categoryId) {
+		return prodRepo.findByCategoryId(categoryId);
 	}
 	
 

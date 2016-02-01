@@ -21,7 +21,7 @@ public class ProductControllerTest  extends junit.framework.TestCase{
 		Product expectedProduct = new Product();
 		expectedProduct.setName("HDMI Cable");
 		expectedProduct.setId(1L);
-		expectedProduct.setCategories(new String[]{"Computers","TV"});
+//		expectedProduct.setCategories(N);
 				
 		ProductService mockProdSvc = mock(ProductService.class);
 		when(mockProdSvc.findOne(1L)).thenReturn(expectedProduct );
