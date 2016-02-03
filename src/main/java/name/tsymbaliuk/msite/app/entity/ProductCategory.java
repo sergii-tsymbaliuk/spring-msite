@@ -1,16 +1,10 @@
 package name.tsymbaliuk.msite.app.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -23,7 +17,7 @@ public class ProductCategory {
 
 	private Long id;
 	private String name;
-	private Set<Product> products = new HashSet<Product>(0);
+	private Collection<Product> products = new ArrayList<>(0);
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -43,12 +37,15 @@ public class ProductCategory {
 		this.name = name;
 	}
 	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	public Set<Product> getProducts() {
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "product_category",
+			joinColumns = {@JoinColumn(name = "CATEGORY_ID", nullable = false) },
+			inverseJoinColumns = { @JoinColumn(name = "PRODUCT_ID", nullable = false) })
+	public Collection<Product> getProducts() {
 		return this.products ;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(Collection<Product> products) {
 		this.products = products;
 	}
 }

@@ -61,7 +61,7 @@ public class ProductService {
 	}
 
 	public List<Product> findAll() {
-		return prodRepo.findAll();
+		return prodRepo.findAllWithCategory();
 	}
 
 	public List<Product> findAll(Iterable<Long> arg0) {
@@ -97,6 +97,8 @@ public class ProductService {
 	public List<Product> findByCategoryId(Long categoryId) {
 		return prodRepo.findByCategoryId(categoryId);
 	}
+
+
 	
 
 

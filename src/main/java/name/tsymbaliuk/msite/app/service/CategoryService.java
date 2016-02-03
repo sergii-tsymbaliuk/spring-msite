@@ -1,9 +1,12 @@
 package name.tsymbaliuk.msite.app.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import name.tsymbaliuk.msite.app.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -98,7 +101,19 @@ public class CategoryService {
 	public void deleteAll() {
 		categoryRepository.deleteAll();
 	}
-	
-	
+
+	public Collection<Product> getProducts(Long id){
+		return categoryRepository.getOne(id).getProducts();
+	}
+
+	public Collection<Product> getProducts(){
+		List<Product> products = new ArrayList<>();
+		Collection<ProductCategory> categories = findAll();
+		for (ProductCategory c : categories){
+			products.addAll(c.getProducts());
+		}
+
+        return products;
+	}
 	
 }

@@ -1,17 +1,13 @@
 package name.tsymbaliuk.msite.app.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.ManyToMany;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -26,7 +22,7 @@ public class Product {
 	private Long id;
 	private String name;
 	private String description;
-	private Set<ProductCategory> categories = new HashSet<ProductCategory>(0);
+	private Collection<ProductCategory> categories = new ArrayList<>(0);
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -47,16 +43,14 @@ public class Product {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}	
-	@ManyToMany(fetch = FetchType.EAGER/*, cascade = CascadeType.ALL*/)
-	@JoinTable(name = "product_category",
-		joinColumns = {@JoinColumn(name = "PRODUCT_ID", nullable = false, updatable = false) }, 
-		inverseJoinColumns = { @JoinColumn(name = "CATEGORY_ID", nullable = false, updatable = false) })
-	public Set<ProductCategory> getCategories() {
+	}
+
+	@ManyToMany( fetch = FetchType.EAGER, mappedBy = "products", cascade = CascadeType.ALL)
+	public Collection<ProductCategory> getCategories() {
 		return this.categories;
 	}
 	
-	public void setCategories(Set<ProductCategory> categories) {
+	public void setCategories(Collection<ProductCategory> categories) {
 		this.categories = categories;
 	}
 

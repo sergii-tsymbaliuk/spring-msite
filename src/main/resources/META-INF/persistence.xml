@@ -4,23 +4,23 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 	<persistence-unit name="msite_unit">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<properties>
-		
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/msite"/>
-            <property name="javax.persistence.jdbc.user" value="user"/>
-            <property name="javax.persistence.jdbc.password" value="12345678"/>
+		<!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+		<!--<properties>-->
+		<!---->
+            <!--&lt;!&ndash;<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/msite"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="javax.persistence.jdbc.user" value="user"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="javax.persistence.jdbc.password" value="12345678"/>&ndash;&gt;-->
 
-            <!--Hibernate properties-->
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-<!--             <property name="hibernate.hbm2ddl.auto" value="update"/> -->
-			<property name="hibernate.hbm2ddl.auto" value="update"/>
-			<property name="hibernate.flushMode" value="FLUSH_AUTO" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <!--&lt;!&ndash;&lt;!&ndash;Hibernate properties&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="hibernate.show_sql" value="true"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="hibernate.format_sql" value="true"/>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;             <property name="hibernate.hbm2ddl.auto" value="update"/> &ndash;&gt;&ndash;&gt;-->
+			<!--&lt;!&ndash;<property name="hibernate.hbm2ddl.auto" value="update"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<property name="hibernate.flushMode" value="FLUSH_AUTO" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>&ndash;&gt;-->
 
-		</properties>
+		<!--</properties>-->
 	</persistence-unit>
 	<!-- <persistence-unit name="msite_unit_old"> -->
 	<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->

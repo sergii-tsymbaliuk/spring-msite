@@ -28,8 +28,8 @@
 				<td>
 					<ol>
 						<c:if test="${product.categories.size() > 0}">
-							<c:forEach var="category" items="${product.categories}">
-								<li>${category.name}</li>
+							<c:forEach var="cat" items="${product.categories}">
+								<li>${cat.getName()}</li>
 							</c:forEach>
 						</c:if>
 						<li><b>add</b></li>
