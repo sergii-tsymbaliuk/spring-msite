@@ -1,10 +1,11 @@
 package name.tsymbaliuk.msite.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.inject.Inject;
 
+import name.tsymbaliuk.msite.app.service.MSiteService;
+import name.tsymbaliuk.msite.app.service.MSiteServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -14,18 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import name.tsymbaliuk.msite.app.entity.Product;
 import name.tsymbaliuk.msite.app.entity.ProductCategory;
-import name.tsymbaliuk.msite.app.service.CategoryService;
-import name.tsymbaliuk.msite.app.service.ProductService;
 
 @Controller
 @RequestMapping("/admin")
 @Transactional
 public class AdminController {
 	@Inject
-	ProductService prodSvc;
-	@Inject
-	CategoryService categorySvc;
-	
+	MSiteService service;
+
 	@RequestMapping(method=RequestMethod.GET)
 	String adminHome(){
 		return "/admin/main";
@@ -33,23 +30,20 @@ public class AdminController {
 	
 	@RequestMapping(value="/products",method=RequestMethod.GET)
 	String adminProducts(@RequestParam(required = false) Long categoryId, Model model){
-		List<Product> products;
+		//TODO: Move business logic to the service
+		Collection<Product> products;
 		if (categoryId != null) {
-			products = prodSvc.findByCategoryId (categoryId);
+			products = service.findProductsByCategoryId(categoryId);
 		} else {
-			products = prodSvc.findAll();
+			products = service.findAllProducts();
 		}
-		products.forEach(p -> {
-			p.setCategories(p.getCategories());
-		});
+		//products.forEach( p -> p.setCategories(p.getCategories()));
 		model.addAttribute("productList",products);
-//		model.addAttribute("categoryList",categorySvc.findAll());
-		///products.forEach(Product::getCategories);
 		return "/admin/products";
 	}
 	
 	@RequestMapping(value="/categories",method=RequestMethod.GET)
-	List<ProductCategory> adminCategories(){
-		return categorySvc.findAll();
+	Collection<ProductCategory> adminCategories(){
+		return service.findAllCategories();
 	}
 }

@@ -1,5 +1,6 @@
 package name.tsymbaliuk.msite.test.web;
 
+import name.tsymbaliuk.msite.app.service.MSiteService;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -7,12 +8,9 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
-import name.tsymbaliuk.msite.web.controller.HelpController;
 
-import name.tsymbaliuk.msite.app.data.ProductRepository;
 import name.tsymbaliuk.msite.app.entity.Product;
-import name.tsymbaliuk.msite.app.service.ProductService;
-import name.tsymbaliuk.msite.web.controller.ProductController;
+import name.tsymbaliuk.msite.web.controller.MSiteWebController;
 
 public class ProductControllerTest  extends junit.framework.TestCase{
 
@@ -23,10 +21,10 @@ public class ProductControllerTest  extends junit.framework.TestCase{
 		expectedProduct.setId(1L);
 //		expectedProduct.setCategories(N);
 				
-		ProductService mockProdSvc = mock(ProductService.class);
-		when(mockProdSvc.findOne(1L)).thenReturn(expectedProduct );
+		MSiteService mockProdSvc = mock(MSiteService.class);
+		when(mockProdSvc.findProductById(1L)).thenReturn(expectedProduct );
 		
-		ProductController prodController = new ProductController();
+		MSiteWebController prodController = new MSiteWebController();
 		ReflectionTestUtils.setField( prodController, "productService", mockProdSvc );
 		
 		MockMvc mockMvc = standaloneSetup(prodController).build();
