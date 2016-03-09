@@ -33,7 +33,7 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td style="color: green"><a href="/admin/category/add" /><b>Add</b></a></td>
+			<td style="color: green"><a href="/admin/category/add"><b>Add</b></a></td>
 		</tr>
 	</table>
 </body>

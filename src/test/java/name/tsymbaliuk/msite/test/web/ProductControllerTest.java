@@ -16,10 +16,11 @@ public class ProductControllerTest  extends junit.framework.TestCase{
 
 	@Test
 	public void test() throws Exception {
-		Product expectedProduct = new Product();
-		expectedProduct.setName("HDMI Cable");
+		Product expectedProduct = new Product.Builder()
+									.name("HDMI Cable")
+									.description("Test product")
+									.build();
 		expectedProduct.setId(1L);
-//		expectedProduct.setCategories(N);
 				
 		MSiteService mockProdSvc = mock(MSiteService.class);
 		when(mockProdSvc.findProductById(1L)).thenReturn(expectedProduct );

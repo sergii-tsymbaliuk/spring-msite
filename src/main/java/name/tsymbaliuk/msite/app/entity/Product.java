@@ -2,9 +2,6 @@ package name.tsymbaliuk.msite.app.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -29,6 +26,34 @@ public class Product {
 	public Long getId() {
 		return id;
 	}
+	
+	public static class Builder {
+		private String name;
+		private String description;
+		
+		public Builder name(String name){
+			this.name = name;
+			return this;
+		}
+		
+		public Builder description(String description){
+			this.description = description;
+			return this;
+		}
+		
+		public Product build(){
+			Product product = new Product();
+			product.name = this.name;
+			product.description = this.description;
+			
+			return product;
+		}
+	}
+	
+	private Product() {
+		super();
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -45,7 +70,7 @@ public class Product {
 		this.description = description;
 	}
 
-	@ManyToMany( fetch = FetchType.EAGER, mappedBy = "products", cascade = CascadeType.ALL)
+	@ManyToMany( fetch = FetchType.EAGER, mappedBy = "products", cascade = CascadeType.ALL )
 	public Collection<ProductCategory> getCategories() {
 		return this.categories;
 	}
